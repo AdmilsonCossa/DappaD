@@ -20,7 +20,7 @@ public class NoteController {
 	private NoteService noteService;
 
 	@RequestMapping("/index")
-	public String listContacts(Map<String, Object> map) {
+	public String listNote(Map<String, Object> map) {
 
 		map.put("note", new Note());
 		map.put("noteList", noteService.listNote());
@@ -34,19 +34,46 @@ public class NoteController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addContact(@ModelAttribute("note") Note note,
+	public String addNote(@ModelAttribute("note") Note note,
 			BindingResult result) {
 
 		noteService.addNote(note);
 
 		return "redirect:/index";
 	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updateNote(@ModelAttribute("note") Note note,
+			BindingResult result) {
 
+		noteService.updateNote(note);
+
+		return "redirect:/index";
+	}
+	
+	
 	@RequestMapping("/delete/{noteId}")
-	public String deleteContact(@PathVariable("noteId") Integer noteId) {
+	public String deleteNote(@PathVariable("noteId") Integer noteId) {
 
 		noteService.removeNote(noteId);
 
 		return "redirect:/index";
 	}
+	
+	@RequestMapping("/load/{noteId}")
+	public String loadNote(@PathVariable("noteId") Integer noteId) {
+
+		noteService.loadNote(noteId);
+
+		return "redirect:/index";
+	}
+		
+	@RequestMapping("/edit/{noteId}")
+	public String editNote(@PathVariable("noteId") Integer noteId, Map<String, Object> map) {
+
+		map.put("note", noteService.loadNote(noteId));
+
+		return "edit";
+	}
+		
 }

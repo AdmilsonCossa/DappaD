@@ -17,6 +17,10 @@ public class NoteDAOImpl implements NoteDAO {
 	public void addNote(Note note) {
 		sessionFactory.getCurrentSession().save(note);
 	}
+	
+	public void updateNote(Note note) {
+		sessionFactory.getCurrentSession().merge(note);
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Note> listNote() {
@@ -31,6 +35,20 @@ public class NoteDAOImpl implements NoteDAO {
 		if (null != note) {
 			sessionFactory.getCurrentSession().delete(note);
 		}
+
+	}
+	
+	public Note loadNote(Integer id) {
+		Note note = (Note) sessionFactory.getCurrentSession().load(Note.class,
+				id);
+		System.out.println(note.getTitle() + " : " + note.getText());
+		return note;
+	}
+	
+	
+	public void editNote(Integer id) {
+		Note note = loadNote(id);
+		System.out.println(note.getTitle() + " : " + note.getText());
 
 	}
 

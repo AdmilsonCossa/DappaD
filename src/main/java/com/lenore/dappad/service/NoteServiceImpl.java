@@ -19,6 +19,11 @@ public class NoteServiceImpl implements NoteService{
 	public void addNote(Note note) {
 		noteDAO.addNote(note);
 	}
+	
+	@Transactional
+    public void updateNote(Note note) {
+		noteDAO.updateNote(note);
+	}
 
 	@Transactional
 	public List<Note> listNote() {
@@ -28,7 +33,17 @@ public class NoteServiceImpl implements NoteService{
 	@Transactional
 	public void removeNote(Integer id) {
 		noteDAO.removeNote(id);
-		
 	}
+	
+	@Transactional
+	public Note loadNote(Integer id) {
+		return noteDAO.loadNote(id);
+	}
+	
+	@Transactional
+	public void editNote(Integer id) {
+		noteDAO.editNote(id);
+	}
+	
 
 }
