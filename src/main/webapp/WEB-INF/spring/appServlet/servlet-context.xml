@@ -28,6 +28,4 @@
 	<beans:import resource="controllers.xml" />
 
 
-
-
 </beans:beans>

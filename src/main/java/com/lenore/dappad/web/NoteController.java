@@ -25,7 +25,7 @@ public class NoteController {
 		map.put("note", new Note());
 		map.put("noteList", noteService.listNote());
 
-		return "note";
+		return "home";
 	}
 
 	@RequestMapping("/")
@@ -33,7 +33,7 @@ public class NoteController {
 		return "redirect:/index";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/addNote", method = RequestMethod.POST)
 	public String addNote(@ModelAttribute("note") Note note,
 			BindingResult result) {
 
@@ -60,12 +60,12 @@ public class NoteController {
 		return "redirect:/index";
 	}
 	
-	@RequestMapping("/load/{noteId}")
+	@RequestMapping("/note/{noteId}")
 	public String loadNote(@PathVariable("noteId") Integer noteId) {
 
 		noteService.loadNote(noteId);
 
-		return "redirect:/index";
+		return "loadNote";
 	}
 		
 	@RequestMapping("/edit/{noteId}")
@@ -73,7 +73,14 @@ public class NoteController {
 
 		map.put("note", noteService.loadNote(noteId));
 
-		return "edit";
+		return "editNote";
 	}
 		
+	@RequestMapping("/add")
+	public String add(Map<String, Object> map) {
+
+		map.put("note", new Note());
+
+		return "addNote";
+	}
 }

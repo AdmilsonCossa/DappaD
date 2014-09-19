@@ -1,0 +1,81 @@
+@CHARSET "ISO-8859-1";
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background-color: #eee;
+}
+
+ol {
+	list-style: none;
+}
+
+li {
+	padding: 5px 0;
+}
+
+div {
+	vertical-align: top;
+}
+
+.wrapper {
+	background-color: white;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.header, .main, .footer {
+	display: block;
+	margin: 0 auto;
+	background-color: #eee;
+	padding: 10px 0;
+	width: 100%;
+	background-color: #eee;
+	background-color: #eee
+}
+
+.header li {
+	display: inline;
+	padding: 0 20px;
+}
+
+.main div {
+	display: inline-block;
+}
+
+.note-list-title {
+	width: 20%;
+}
+
+.note-list-text {
+	width: 60%;
+}
+
+.note-list-acion {
+	width: 10%;
+}
+
+.note-add {
+	width: 70%;
+	margin: 0 auto;
+	display: block;
+}
+
+.note-add  input {
+	padding: 5px;
+}
+.note-add textarea {
+	padding: 5px;
+	min-height: 300px;
+}
+
+.cancel {
+	right: 10px;
+}
+
+.wide {
+	width: 100%
+}

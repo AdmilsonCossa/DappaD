@@ -20,7 +20,7 @@
 
 	<!-- packages for component scan -->
 	<context:component-scan base-package="com.lenore.dappad" />
-
+	
 	<!-- data access resources file -->
 	<import resource="data.xml" />
 
