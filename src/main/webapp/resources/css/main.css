@@ -1,12 +1,10 @@
-@CHARSET "ISO-8859-1";
-
 * {
 	padding: 0;
 	margin: 0;
 }
 
 body {
-	background-color: #eee;
+	padding-top: 70px;
 }
 
 ol {
@@ -21,61 +19,51 @@ div {
 	vertical-align: top;
 }
 
-.wrapper {
-	background-color: white;
-	width: 80%;
-	margin: 0 auto;
+textarea {
+	resize: none;
 }
 
-.header, .main, .footer {
+.footer {
+	margin-top: 100px; padding-top : 19px;
+	color: #777;
+	border-top: 1px solid #e5e5e5;
+	padding-top: 19px;
+}
+
+.note-list-title a:HOVER {
+	text-decoration: none;
+}
+
+.acion-right {
+	float: right;
+	top: 0px;
 	display: block;
-	margin: 0 auto;
-	background-color: #eee;
-	padding: 10px 0;
-	width: 100%;
-	background-color: #eee;
-	background-color: #eee
 }
 
-.header li {
-	display: inline;
-	padding: 0 20px;
-}
-
-.main div {
-	display: inline-block;
-}
-
-.note-list-title {
-	width: 20%;
-}
-
-.note-list-text {
-	width: 60%;
-}
-
-.note-list-acion {
-	width: 10%;
-}
-
-.note-add {
+.note {
 	width: 70%;
-	margin: 0 auto;
+	margin: 50px auto;
 	display: block;
 }
 
-.note-add  input {
+.note input {
 	padding: 5px;
 }
-.note-add textarea {
+
+.note textarea {
 	padding: 5px;
 	min-height: 300px;
+	height: auto;
 }
 
-.cancel {
-	right: 10px;
-}
 
 .wide {
 	width: 100%
+}
+
+.crop {
+	height: 25px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
 }

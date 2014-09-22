@@ -7,25 +7,35 @@
 
 <jsp:include page="header.jsp" />
 
-<div class="main">
-	<h2>
-		<spring:message code="label.edit" />
-		${note.title}
-	</h2>
+<div class="container">
+
+	<h3>
+		<a href="../delete/${note.id}" class="label label-danger acion-right">
+			<spring:message code="label.delete" />&nbsp;<spring:message code="label.note" />
+		</a>
+		<spring:message code="label.edit" />&nbsp;<spring:message code="label.note" />
+	</h3>
 
 
-	<form:form method="post" action="../update" commandName="note"
-		class="note-add">
+
+
+	<form:form method="post" action="../update" commandName="note" class="note">
 		<form:hidden path="id" value="${note.id}" />
 
 		<ol>
 			<li><form:input path="title" value="${note.title}"
-					maxlength="250" class="wide"/></li>
+					maxlength="250" class="wide" /></li>
 			<li><form:textarea path="text" value="${note.text}"
-					maxlength="3000" class="wide"/></li>
-			<li><input type="submit"
-				value="<spring:message code="label.save"/>" /> <a href="../"><spring:message
-						code="label.cancel" /></a></li>
+					maxlength="3000" class="wide" /></li>
+			<li>
+				<button type="submit" class="btn btn-primary acion-right" value="submit">
+					<spring:message code="label.save" />
+				</button> 
+				<a href="../" class="btn btn-default"><spring:message
+						code="label.cancel" /></a>
+			</li>
+
+
 		</ol>
 
 	</form:form>

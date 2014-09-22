@@ -1,29 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="utf8"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix ="fmt" %>
-<jsp:include page="header.jsp" />
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<div class="main">
-	<c:if test="${!empty noteList}">
+
+<jsp:include page="header.jsp" />
+<div class="container">
 	
-		<div class="data">
-			<ol>
+	<h2>All notes</h2>
+	
+	<c:if test="${!empty noteList}">
+
+		<table class="table table-hover">
+			<tbody>
 				<c:forEach items="${noteList}" var="note">
-					<li>
-						<div class="note-list-title">${note.title}</div>
-						<div class="note-list-text">${note.text}</div>
-						<div class="note-list-acion">
-							<a href="delete/${note.id}"><spring:message
-									code="label.delete" /></a>&nbsp; <a href="edit/${note.id}"><spring:message
-									code="label.edit" /></a>
-						</div>
-					</li>
+					<tr>
+						<td class="note-list-title" >
+							<div class="acion-right">								
+								<a href="edit/${note.id}" class="btn btn-default btn-sm">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</a>&nbsp;
+								<a href="delete/${note.id}" class="btn btn-warning btn-sm">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a> 
+							</div>
+							<a class="crop" href="note/${note.id}">${note.title} </a>
+						</td>
+					</tr>
 				</c:forEach>
-			</ol>
-		</div>
+			</tbody>
+		</table>
 
 	</c:if>
 </div>

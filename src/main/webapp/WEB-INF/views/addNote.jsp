@@ -7,15 +7,18 @@
 
 <jsp:include page="header.jsp" />
 
-<div class="main">
-	<form:form method="post" action="addNote" commandName="note"
-		class="note-add">
+<div class="container">
+	<form:form method="post" action="addNote" commandName="note" class="note">
 
 		<ol>
 			<li><form:input path="title" maxlength="250" class="wide" /></li>
 			<li><form:textarea path="text" maxlength="3000" class="wide" /></li>
-			<li><input type="submit"
-				value="<spring:message code="label.addnote"/>" /></li>
+			<li>
+				<input type="submit" class="btn btn-primary acion-right" value="<spring:message code="label.save"/>" /> 
+				<a href="../" class="btn btn-default ">
+					<spring:message code="label.cancel" />
+				</a>
+			</li>
 		</ol>
 
 	</form:form>
