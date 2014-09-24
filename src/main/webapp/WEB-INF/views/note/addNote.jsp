@@ -5,10 +5,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<jsp:include page="header.jsp" />
+<jsp:include page="../header.jsp" />
 
 <div class="container">
-	<form:form method="post" action="addNote" commandName="note" class="note">
+	<form:form method="post" action="/add" commandName="note" class="note">
 
 		<ol>
 			<li><form:input path="title" maxlength="250" class="wide" /></li>
@@ -24,4 +24,4 @@
 	</form:form>
 </div>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="../footer.jsp" />

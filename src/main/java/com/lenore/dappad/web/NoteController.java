@@ -20,40 +20,43 @@ public class NoteController {
 
 	// Pages to open
 	
-	@RequestMapping("/note/{noteId}")
-	public String loadNote(@PathVariable("noteId") Integer noteId) {
+	@RequestMapping("/n-{action}/{noteId}")
+	public ModelAndView action(@PathVariable("noteId") Integer noteId, @PathVariable("action") String action) {
 
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("note/" + action + "Note");
+		System.out.println(mav.getViewName());
+		mav.addObject("note", noteService.loadNote(noteId));
 		noteService.loadNote(noteId);
 
-		return "loadNote";
+		return mav;
 	}
 	
-	@RequestMapping("/add")
+	@RequestMapping("/n-create")
 	public ModelAndView add() {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("addNote");
+		mav.setViewName("note/addNote");
 		mav.addObject("note", new Note());
 
 		return mav;
 	}	
 	
-	@RequestMapping("/edit/{noteId}")
-	public ModelAndView editNote(@PathVariable("noteId") Integer noteId) {
-
+	@RequestMapping("/listNotes")
+	public ModelAndView listNote() {
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("note/allNotes");
+		mav.addObject("noteList", noteService.listNote());
 
-		mav.setViewName("editNote");
-		mav.addObject("note", noteService.loadNote(noteId));
 		return mav;
-
-	}	
+	}
 	
 	
 	//Actions to perform
 	
-	@RequestMapping(value = "/addNote", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addNote(@ModelAttribute("note") Note note,
 			BindingResult result) {
 
@@ -71,10 +74,11 @@ public class NoteController {
 		return "redirect:/";
 	}
 
-	@RequestMapping("/delete/{noteId}")
-	public String deleteNote(@PathVariable("noteId") Integer noteId) {
+	@RequestMapping("/delete")
+	public String deleteNote(@ModelAttribute("note") Note note,
+			BindingResult result) {
 
-		noteService.removeNote(noteId);
+		noteService.removeNote(note);
 
 		return "redirect:/";
 	}

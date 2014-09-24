@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,10 @@ public class Note {
 
     @Column(name = "TEXT")
     private String text;
+    
+    @ManyToOne
+    @JoinColumn(name = "notebook_id")
+    private Notebook notebook;
 
 	public Integer getId() {
 		return id;
@@ -43,6 +49,14 @@ public class Note {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Notebook getNotebook() {
+		return notebook;
+	}
+
+	public void setNotebook(Notebook notebook) {
+		this.notebook = notebook;
 	}
 
 

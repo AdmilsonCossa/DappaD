@@ -21,7 +21,6 @@
 
 <%
 String uri = request.getRequestURI();
-System.out.println(uri);
 String pageName = uri.substring(uri.lastIndexOf("/")+1);
 request.setAttribute("pageName", pageName);
 %>
@@ -41,8 +40,16 @@ request.setAttribute("pageName", pageName);
 					<li class="${pageName eq 'home.jsp' ? 'active' : ''}">
 						<a href="<c:url value="/" />">Home</a>
 					</li>
+					<li class="${pageName eq 'allNotes.jsp' ? 'active' : ''}">
+						<a href="<c:url value="/listNotes" />">Notes</a>
+					</li>
+					
+					<li class="${pageName eq 'allNotebooks.jsp' ? 'active' : ''}">
+						<a href="<c:url value="/listNotebooks" />">Notebooks</a>
+					</li>
+					
 					<li class="${pageName eq 'addNote.jsp' ? 'active' : ''}">
-						<a href="<c:url value="/add" />" ><spring:message code="label.addnote" /></a>
+						<a href="<c:url value="/n-create" />" ><spring:message code="label.addnote" /></a>
 					</li>
 					<li>
 						<a href="<c:url value="/logout" />"><spring:message code="label.logout" /></a>

@@ -11,7 +11,7 @@ public interface NoteService {
 
     public List<Note> listNote();
 
-    public void removeNote(Integer id);
+    public void removeNote(Note note);
     public Note loadNote(Integer id);
     public void editNote(Integer id);
 }
