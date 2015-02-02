@@ -7,9 +7,9 @@ http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
 	<http access-denied-page="/error403">
 		<intercept-url pattern="/index*" access="ROLE_USER,ROLE_ANONYMOUS" />
-		<intercept-url pattern="/add*" access="ROLE_USER" />
-		<intercept-url pattern="/delete/*" access="ROLE_ADMIN" />
-		<intercept-url pattern="/edit/*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/*/add*" access="ROLE_USER" />
+		<intercept-url pattern="/*/delete/*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/*/edit/*" access="ROLE_ADMIN" />
 		<form-login login-page="/login" default-target-url="/"
 			authentication-failure-url="/login?error=true" />
 		<logout logout-url="/logout" logout-success-url="/" />

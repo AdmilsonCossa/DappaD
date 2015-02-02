@@ -49,7 +49,7 @@ request.setAttribute("pageName", pageName);
 					</li>
 					
 					<li class="${pageName eq 'addNote.jsp' ? 'active' : ''}">
-						<a href="<c:url value="/n-create" />" ><spring:message code="label.addnote" /></a>
+						<a href="<c:url value="/note/add" />" ><spring:message code="label.addnote" /></a>
 					</li>
 					<li>
 						<a href="<c:url value="/logout" />"><spring:message code="label.logout" /></a>

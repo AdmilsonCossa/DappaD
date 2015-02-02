@@ -11,7 +11,7 @@
 <div class="container">
 	
 	<h3>
-		<a href="/nb-create" class="label label-success action-right">
+		<a href="/notebook/add" class="label label-success action-right">
 			new
 		</a>
 		your notebooks
@@ -25,14 +25,14 @@
 					<tr>
 						<td class="note-list-title" >
 							<div class="action-right">								
-								<a href="/nb-edit/${notebook.id}" class="btn btn-default btn-sm">
+								<a href="/notebook/${notebook.id}/edit" class="btn btn-default btn-sm">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</a>&nbsp;
-								<a href="/nb-delete/${notebook.id}" class="btn btn-warning btn-sm">
+								<a href="/notebook/${notebook.id}/delete" class="btn btn-warning btn-sm">
 									<span class="glyphicon glyphicon-remove"></span>
 								</a> 
 							</div>
-							<a class="crop" href="/nb-load/${notebook.id}">${notebook.name} </a>
+							<a class="crop" href="/notebook/${notebook.id}/load">${notebook.name} </a>
 						</td>
 					</tr>
 				</c:forEach>

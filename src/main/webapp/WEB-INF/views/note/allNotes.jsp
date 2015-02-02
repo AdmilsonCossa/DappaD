@@ -11,7 +11,7 @@
 <div class="container">
 	
 	<h3>
-		<a href="/n-create" class="label label-success action-right">
+		<a href="/node/add" class="label label-success action-right">
 			new
 		</a>
 		all notes
@@ -32,7 +32,7 @@
 									<span class="glyphicon glyphicon-remove"></span>
 								</a> 
 							</div>
-							<a class="crop" href="note/${note.id}/load">${note.title} </a>
+							<a class="crop" href="note/${note.id}">${note.title} </a>
 						</td>
 					</tr>
 				</c:forEach>

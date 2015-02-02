@@ -10,7 +10,7 @@
 <div class="container">
 
 	<h3>
-		<a href="/nb-delete/${notebook.id}" class="label label-danger action-right">
+		<a href="/notebook/${notebook.id}/delete" class="label label-danger action-right">
 			<spring:message code="label.delete" />
 		</a>
 		edit : ${notebook.name}
@@ -19,7 +19,7 @@
 
 
 
-	<form:form method="post" action="../update" commandName="notebook" class="note">
+	<form:form method="post" action="nb/update" commandName="notebook" class="note">
 		<form:hidden path="id" value="${notebook.id}" />
 
 		<ol>
@@ -29,7 +29,7 @@
 				<button type="submit" class="btn btn-primary acion-right" value="submit">
 					<spring:message code="label.save" />
 				</button> 
-				<a href="/nb-load/${notebook.id}" class="btn btn-default"><spring:message
+				<a href="/notebook/${notebook.id}/load" class="btn btn-default"><spring:message
 						code="label.cancel" /></a>
 			</li>
 		</ol>

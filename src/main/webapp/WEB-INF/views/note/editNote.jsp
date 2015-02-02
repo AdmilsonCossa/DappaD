@@ -10,7 +10,7 @@
 <div class="container">
 
 	<h3>
-		<a href="../delete/${note.id}" class="label label-danger acion-right">
+		<a href="note/${note.id}/delete" class="label label-danger acion-right">
 			<spring:message code="label.delete" />&nbsp;<spring:message code="label.note" />
 		</a>
 		<spring:message code="label.edit" />&nbsp;<spring:message code="label.note" />
@@ -19,7 +19,7 @@
 
 
 
-	<form:form method="post" action="../update" commandName="note" class="note">
+	<form:form method="post" action="/update" commandName="note" class="note">
 		<form:hidden path="id" value="${note.id}" />
 
 		<ol>

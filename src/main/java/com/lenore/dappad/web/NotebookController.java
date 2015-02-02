@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lenore.dappad.domain.Note;
@@ -21,7 +24,7 @@ public class NotebookController {
 
 	// Pages to open
 	
-	@RequestMapping("/nb-{action}/{notebookId}")
+	@RequestMapping("/notebook/{notebookId}/{action}")
 	public ModelAndView action(@PathVariable("notebookId") Integer notebookId, @PathVariable("action") String action) {
 
 		ModelAndView mav = new ModelAndView();
@@ -32,7 +35,7 @@ public class NotebookController {
 		return mav;
 	}
 	
-	@RequestMapping("/nb-load/{notebookId}")
+	@RequestMapping("/notebook/{notebookId}")
 	public ModelAndView load(@PathVariable("notebookId") Integer notebookId) {
 
 		ModelAndView mav = new ModelAndView();
@@ -56,5 +59,44 @@ public class NotebookController {
 		return mav;
 	}
 	
+	@RequestMapping("/notebook/add")
+	public ModelAndView add() {
+
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("notebook/addNotebook");
+		mav.addObject("notebook", new Notebook());
+
+		return mav;
+	}	
+	
+	//Actions to perform
+	
+		@RequestMapping(value = "nb/add", method = RequestMethod.POST)
+		public String addNote(@ModelAttribute("notebook") Notebook notebook,
+				BindingResult result) {
+
+			notebookService.addNotebook(notebook);
+
+			return "redirect:/listNotebooks";
+		}
+
+		@RequestMapping(value = "nb/update", method = RequestMethod.POST)
+		public String updateNote(@ModelAttribute("notebook") Notebook notebook,
+				BindingResult result) {
+
+			notebookService.updateNotebook(notebook);
+
+			return "redirect:/";
+		}
+
+		@RequestMapping("nb/delete")
+		public String deleteNote(@ModelAttribute("notebook") Notebook notebook,
+				BindingResult result) {
+
+			notebookService.removeNotebook(notebook);
+
+			return "redirect:/";
+		}
 
 }

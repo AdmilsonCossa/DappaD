@@ -11,7 +11,7 @@
 		<spring:message code="label.delete" />&nbsp;<spring:message code="label.note" />
 	</h3>
 
-	<form:form method="post" action="/delete" commandName="notebook" class="note">
+	<form:form method="post" action="/nb/delete" commandName="notebook" class="note">
 		<form:hidden path="id" value="${notebook.id}" />
 
 		<ol>
