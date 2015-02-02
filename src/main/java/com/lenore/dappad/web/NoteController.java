@@ -20,7 +20,7 @@ public class NoteController {
 
 	// Pages to open
 	
-	@RequestMapping("/n-{action}/{noteId}")
+	@RequestMapping("/note/{noteId}/{action}/")
 	public ModelAndView action(@PathVariable("noteId") Integer noteId, @PathVariable("action") String action) {
 
 		ModelAndView mav = new ModelAndView();
@@ -33,7 +33,7 @@ public class NoteController {
 		return mav;
 	}
 	
-	@RequestMapping("/n-create")
+	@RequestMapping("/note/create")
 	public ModelAndView add() {
 
 		ModelAndView mav = new ModelAndView();
