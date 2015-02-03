@@ -55,6 +55,7 @@ request.setAttribute("pageName", pageName);
 						<a href="<c:url value="/logout" />"><spring:message code="label.logout" /></a>
 					</li>
 				</ul>
+				
 			</div>
 			
 		</div>

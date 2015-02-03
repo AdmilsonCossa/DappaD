@@ -49,6 +49,19 @@ public class NotebookController {
 		return mav;
 	}
 	
+	@RequestMapping("/notebook/{notebookId}/add")
+	public ModelAndView addNoteToNb(@PathVariable("notebookId") Integer notebookId) {
+
+		ModelAndView mav = new ModelAndView();
+		Notebook notebook = notebookService.loadNotebook(notebookId);
+
+		Note note = new Note();
+		note.setNotebook(notebook);
+		mav.setViewName("note/addNote");
+		mav.addObject("note", note);
+
+		return mav;
+	}
 	
 	@RequestMapping("/listNotebooks")
 	public ModelAndView listNotebook() {
@@ -59,12 +72,12 @@ public class NotebookController {
 		return mav;
 	}
 	
-	@RequestMapping("/notebook/add")
+	@RequestMapping("/nb/add")
 	public ModelAndView add() {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("notebook/addNotebook");
+		mav.setViewName("nb/addNotebook");
 		mav.addObject("notebook", new Notebook());
 
 		return mav;

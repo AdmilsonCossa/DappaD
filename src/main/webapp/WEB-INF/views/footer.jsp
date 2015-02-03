@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="footer">
-		<p>&copy; dappad 2014</p>
+		<p>&copy; dappad 2015</p>
 	</div>
 </div>
 

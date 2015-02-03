@@ -20,7 +20,7 @@
 				<button type="submit" class="btn btn-primary acion-right" value="submit">
 					<spring:message code="label.delete" />
 				</button> 
-				<a href="<c:url value="/" />" class="btn btn-default"><spring:message
+				<a href="<c:url value="javascript:history.back()" />" class="btn btn-default"><spring:message
 						code="label.cancel" /></a>
 			</li>
 

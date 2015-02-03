@@ -10,10 +10,10 @@
 <div class="container">
 
 	<h3>
-		<a href="note/${note.id}/delete" class="label label-danger action-right">
+		<a href="/note/${note.id}/delete" class="label label-danger action-right">
 			<spring:message code="label.delete" />
 		</a>
-		<a href="note/${note.id}/edit" class="label label-default action-right">
+		<a href="/note/${note.id}/edit" class="label label-default action-right">
 			<spring:message code="label.edit" />
 		</a>
 		&nbsp;<spring:message code="label.note" />
@@ -22,8 +22,9 @@
 	<ol>
 		<li class="wide">${note.title}</li>
 		<li class="wide">${note.text}</li>
+		<li class="wide">Notebook: ${note.notebook.name}</li>
 		<li>
-			<a href="/" class="btn btn-default"><spring:message
+			<a href="javascript:history.back()" class="btn btn-default"><spring:message
 					code="label.cancel" /></a>
 		</li>
 	</ol>

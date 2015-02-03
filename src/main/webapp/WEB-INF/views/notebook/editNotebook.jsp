@@ -29,7 +29,7 @@
 				<button type="submit" class="btn btn-primary acion-right" value="submit">
 					<spring:message code="label.save" />
 				</button> 
-				<a href="/notebook/${notebook.id}/load" class="btn btn-default"><spring:message
+				<a href="javascript:history.back()" class="btn btn-default"><spring:message
 						code="label.cancel" /></a>
 			</li>
 		</ol>

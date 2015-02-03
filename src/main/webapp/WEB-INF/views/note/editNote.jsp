@@ -10,10 +10,10 @@
 <div class="container">
 
 	<h3>
-		<a href="note/${note.id}/delete" class="label label-danger acion-right">
+		<a href="/note/${note.id}/delete" class="label label-danger acion-right">
 			<spring:message code="label.delete" />&nbsp;<spring:message code="label.note" />
 		</a>
-		<spring:message code="label.edit" />&nbsp;<spring:message code="label.note" />
+			<spring:message code="label.edit" />&nbsp;<spring:message code="label.note" />
 	</h3>
 
 
@@ -31,7 +31,7 @@
 				<button type="submit" class="btn btn-primary acion-right" value="submit">
 					<spring:message code="label.save" />
 				</button> 
-				<a href="../" class="btn btn-default"><spring:message
+				<a href="javascript:history.back()" class="btn btn-default"><spring:message
 						code="label.cancel" /></a>
 			</li>
 

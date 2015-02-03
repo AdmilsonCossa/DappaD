@@ -1,5 +1,6 @@
 package com.lenore.dappad.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Note {
     @Column(name = "TEXT")
     private String text;
     
-    @ManyToOne
+    @ManyToOne(optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "notebook_id")
     private Notebook notebook;
 

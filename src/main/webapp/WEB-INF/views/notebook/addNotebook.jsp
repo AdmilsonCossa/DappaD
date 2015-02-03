@@ -14,7 +14,7 @@
 			<li><form:input path="name" maxlength="250" class="wide" /></li>
 			<li>
 				<input type="submit" class="btn btn-primary acion-right" value="<spring:message code="label.save"/>" /> 
-				<a href="/" class="btn btn-default ">
+				<a href="javascript:history.back()" class="btn btn-default ">
 					<spring:message code="label.cancel" />
 				</a>
 			</li>

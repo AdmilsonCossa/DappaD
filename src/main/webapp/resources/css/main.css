@@ -1,5 +1,5 @@
 * {
-	padding: 5px;
+	padding: 1px;
 	margin: 0;
 }
 
@@ -68,4 +68,18 @@ textarea {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: block;
+}
+.my-nav li {
+	float:left;
+	list-style: none;
+}
+
+.my-nav li a {
+	padding: 10px;
+	text-shadow: 0 1px 0 rgba(255,255,255,.25);
+	color: #777;
+	position: relative;
+	display: block;
+	text-decoration: none;
+	
 }
