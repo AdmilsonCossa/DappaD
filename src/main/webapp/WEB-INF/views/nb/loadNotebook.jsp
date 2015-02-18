@@ -10,10 +10,10 @@
 <div class="container">
 
 	<h3>
-		<a href="/notebook/${notebook.id}/delete" class="label label-danger action-right">
+		<a href="/nb/${notebook.id}/delete" class="label label-danger action-right">
 			<spring:message code="label.delete" />
 		</a>
-		<a href="/notebook/${notebook.id}/edit" class="label label-default action-right">
+		<a href="/nb/${notebook.id}/edit" class="label label-default action-right">
 			<spring:message code="label.edit" />
 		</a>
 		<a href="/note/add" class="label label-success action-right">

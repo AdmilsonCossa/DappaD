@@ -23,7 +23,7 @@ public class NotebookDAOImpl implements NotebookDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Notebook> listNotebook() {
+	public List<Notebook> listAllNotebooks() {
 
 		return sessionFactory.getCurrentSession().createQuery("from Notebook")
 				.list();

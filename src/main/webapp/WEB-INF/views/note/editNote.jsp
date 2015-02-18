@@ -10,16 +10,17 @@
 <div class="container">
 
 	<h3>
-		<a href="/note/${note.id}/delete" class="label label-danger acion-right">
-			<spring:message code="label.delete" />&nbsp;<spring:message code="label.note" />
+		<a href="/note/${note.id}/delete"
+			class="label label-danger acion-right"> <spring:message
+				code="label.delete" />&nbsp;<spring:message code="label.note" />
 		</a>
-			<spring:message code="label.edit" />&nbsp;<spring:message code="label.note" />
+		<spring:message code="label.edit" />
+		&nbsp;
+		<spring:message code="label.note" />
 	</h3>
 
-
-
-
-	<form:form method="post" action="/update" commandName="note" class="note">
+	<form:form method="post" action="/update" modelAttribute="note"
+		class="note">
 		<form:hidden path="id" value="${note.id}" />
 
 		<ol>
@@ -27,11 +28,20 @@
 					maxlength="250" class="wide" /></li>
 			<li><form:textarea path="text" value="${note.text}"
 					maxlength="3000" class="wide" /></li>
+			<c:if test="${!empty notebookList}">
+				<li>Notebook: <form:select path="notebook">
+						<form:option value="${note.notebook }" label="${note.notebook.name }" />
+						<c:forEach items="${notebookList}" var="notebook">
+							<form:option value="${notebook}">${notebook.name}</form:option>
+						</c:forEach>
+
+					</form:select></li>
+			</c:if>
 			<li>
-				<button type="submit" class="btn btn-primary acion-right" value="submit">
+				<button type="submit" class="btn btn-primary acion-right"
+					value="submit">
 					<spring:message code="label.save" />
-				</button> 
-				<a href="javascript:history.back()" class="btn btn-default"><spring:message
+				</button> <a href="javascript:history.back()" class="btn btn-default"><spring:message
 						code="label.cancel" /></a>
 			</li>
 

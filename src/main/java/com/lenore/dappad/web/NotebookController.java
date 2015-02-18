@@ -24,39 +24,39 @@ public class NotebookController {
 
 	// Pages to open
 	
-	@RequestMapping("/notebook/{notebookId}/{action}")
+	@RequestMapping("/nb/{notebookId}/{action}")
 	public ModelAndView action(@PathVariable("notebookId") Integer notebookId, @PathVariable("action") String action) {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("notebook/" + action + "Notebook");
+		mav.setViewName("nb/" + action + "Notebook");
 		mav.addObject("notebook", notebookService.loadNotebook(notebookId));
 
 		return mav;
 	}
 	
-	@RequestMapping("/notebook/{notebookId}")
+	@RequestMapping("/nb/{notebookId}")
 	public ModelAndView load(@PathVariable("notebookId") Integer notebookId) {
 
 		ModelAndView mav = new ModelAndView();
 		Notebook notebook = notebookService.loadNotebookWithNotes(notebookId);
 		List<Note> notes = notebook.getNotes();
 
-		mav.setViewName("notebook/loadNotebook");
+		mav.setViewName("nb/loadNotebook");
 		mav.addObject("notebook", notebook);
 		mav.addObject("noteList", notes);
 
 		return mav;
 	}
 	
-	@RequestMapping("/notebook/{notebookId}/add")
+	@RequestMapping("/nb/{notebookId}/add")
 	public ModelAndView addNoteToNb(@PathVariable("notebookId") Integer notebookId) {
 
 		ModelAndView mav = new ModelAndView();
 		Notebook notebook = notebookService.loadNotebook(notebookId);
 
 		Note note = new Note();
-		note.setNotebook(notebook);
+		note.setNb(notebook);
 		mav.setViewName("note/addNote");
 		mav.addObject("note", note);
 
@@ -66,8 +66,8 @@ public class NotebookController {
 	@RequestMapping("/listNotebooks")
 	public ModelAndView listNotebook() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("notebook/allNotebooks");
-		mav.addObject("notebookList", notebookService.listNotebook());
+		mav.setViewName("nb/allNotebooks");
+		mav.addObject("notebookList", notebookService.listAllNotebooks());
 
 		return mav;
 	}
@@ -85,7 +85,7 @@ public class NotebookController {
 	
 	//Actions to perform
 	
-		@RequestMapping(value = "nb/add", method = RequestMethod.POST)
+		@RequestMapping(value = "/nb/add", method = RequestMethod.POST)
 		public String addNote(@ModelAttribute("notebook") Notebook notebook,
 				BindingResult result) {
 
@@ -94,7 +94,7 @@ public class NotebookController {
 			return "redirect:/listNotebooks";
 		}
 
-		@RequestMapping(value = "nb/update", method = RequestMethod.POST)
+		@RequestMapping(value = "/nb/update", method = RequestMethod.POST)
 		public String updateNote(@ModelAttribute("notebook") Notebook notebook,
 				BindingResult result) {
 
@@ -103,7 +103,7 @@ public class NotebookController {
 			return "redirect:/";
 		}
 
-		@RequestMapping("nb/delete")
+		@RequestMapping("/nb/delete")
 		public String deleteNote(@ModelAttribute("notebook") Notebook notebook,
 				BindingResult result) {
 

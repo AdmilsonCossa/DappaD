@@ -16,10 +16,10 @@ public class NoteDAOImpl implements NoteDAO {
 	private SessionFactory sessionFactory;
 
 	public void addNote(Note note) {
-		if (note.getNotebook() == null){
+		if (note.getNb() == null){
 			Notebook notebook = (Notebook) sessionFactory.getCurrentSession().load(Notebook.class,
 					1);
-			note.setNotebook(notebook);
+			note.setNb(notebook);
 		}
 		sessionFactory.getCurrentSession().save(note);
 	}
@@ -45,7 +45,7 @@ public class NoteDAOImpl implements NoteDAO {
 	public Note loadNote(Integer id) {
 		Note note = (Note) sessionFactory.getCurrentSession().load(Note.class,
 				id);
-		System.out.println(note.getTitle() + " : " + note.getText() + " : " + note.getNotebook());
+		System.out.println(note.getTitle() + " : " + note.getText() + " : " + note.getNb());
 		return note;
 	}
 	

@@ -9,7 +9,7 @@ public interface NotebookService {
 
 	public void updateNotebook(Notebook notebook);
 
-    public List<Notebook> listNotebook();
+    public List<Notebook> listAllNotebooks();
 
     public void removeNotebook(Notebook notebook);
     public Notebook loadNotebook(Integer id);

@@ -1,5 +1,7 @@
 package com.lenore.dappad.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,23 +13,26 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "notes")
-public class Note {
-	
+public class Note implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "ID")
     @GeneratedValue
     private Integer id;
 
-    @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "TEXT")
     private String text;
     
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "notebook_id")
-    private Notebook notebook;
+    private Notebook nb;
 
+    public Note() {
+    	super();
+    }
+    
 	public Integer getId() {
 		return id;
 	}
@@ -52,12 +57,12 @@ public class Note {
 		this.text = text;
 	}
 
-	public Notebook getNotebook() {
-		return notebook;
+	public Notebook getNb() {
+		return nb;
 	}
 
-	public void setNotebook(Notebook notebook) {
-		this.notebook = notebook;
+	public void setNb(Notebook notebook) {
+		this.nb = notebook;
 	}
 
 

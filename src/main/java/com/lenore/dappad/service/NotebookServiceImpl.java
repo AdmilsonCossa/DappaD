@@ -27,8 +27,8 @@ public class NotebookServiceImpl implements NotebookService{
 	}
 
 	@Transactional
-	public List<Notebook> listNotebook() {
-		return notebookDAO.listNotebook();
+	public List<Notebook> listAllNotebooks() {
+		return notebookDAO.listAllNotebooks();
 	}
 
 	@Transactional
