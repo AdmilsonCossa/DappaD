@@ -5,7 +5,7 @@
 
 <jsp:include page="header.jsp" />
 
-<div class="container">
+<div class="container" style="width: 300px;">
 
 	<c:if test="${not empty param.error}">
 		<div class="alert alert-danger"> <spring:message code="label.loginerror" />
@@ -13,31 +13,13 @@
 		</div>
 	</c:if>
 
-	<form class="form-signin" name='loginForm' 
-		action="<c:url value='/j_spring_security_check' />" method='POST'>
-
-		<h2 class="form-signin-heading">Please sign in</h2>
-		
-		<input type="text" name="j_username" class="form-control" > 
-		<input type="password"  name="j_password"  class="form-control"> 
-		<label class="checkbox"> 
-			<input type="checkbox" name="_spring_security_remember_me" value="remember-me">
-			<spring:message code="label.remember" />
-		</label>
-		
-		<div class="btn-block"> 
-			<button class="btn btn-primary" type="submit" value="Login" >
-				Sign in
-			</button>
-				
-			<button class="btn btn-default" type="reset" value="Reset" >
-				Reset
-			</button>
-		</div>
-		
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
-	</form>
+    <c:url value="/j_spring_security_check" var="loginUrl" />
+    <form action="${loginUrl}" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" class="form-control" name="j_username" placeholder="Email address" required autofocus value="colibri">
+        <input type="password" class="form-control" name="j_password" placeholder="Password" required value="1234">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+    </form>
 
 </div>
 

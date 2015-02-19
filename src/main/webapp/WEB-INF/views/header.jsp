@@ -17,7 +17,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 	
 	<link rel="stylesheet" href="/resources/css/main.css">
-	<link rel="stylesheet" href="/resources/css/signin.css">
 </head>
 <body>
 
@@ -61,11 +60,15 @@ request.setAttribute("pageName", pageName);
 							</a>
 						</sec:authorize>
 						<sec:authorize access="isAuthenticated()">
-							user:
-							<sec:authentication property="principal.username" />
-							<a href="<c:url value="/logout" />" role="button">
+							<a href="<c:url value="/logout" />">
 								<spring:message code="label.logout" />
 							</a>
+						</sec:authorize>
+					</li>
+					<li>
+					<sec:authorize access="isAuthenticated()">
+							user:
+							<sec:authentication property="principal.username" />
 						</sec:authorize>
 					</li>
 				</ul>

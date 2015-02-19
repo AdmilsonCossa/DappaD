@@ -24,7 +24,8 @@
 	<!-- data access resources file -->
 	<import resource="data.xml" />
 
-	<!-- security settings -->
+	<!-- security settings 
 	<import resource="security.xml" />
+	-->
 
 </beans>
