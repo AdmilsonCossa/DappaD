@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lenore.dappad.dao.UserDAO;
 import com.lenore.dappad.domain.UserD;
@@ -24,6 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserDAO userDAO;
 
+	@Transactional
 	public UserDetails loadUserByUsername(final String username)
 			throws UsernameNotFoundException {
 

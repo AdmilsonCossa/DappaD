@@ -23,7 +23,7 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 	</http>
  
 	<authentication-manager>
-		<authentication-provider user-service-ref="myUserDetailsService" >
+		<authentication-provider user-service-ref="userDetailsServiceImpl" >
 			<password-encoder hash="bcrypt" />    
 		</authentication-provider>
 	</authentication-manager>

@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,6 +17,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 	
 	<link rel="stylesheet" href="/resources/css/main.css">
+	<link rel="stylesheet" href="/resources/css/signin.css">
 </head>
 <body>
 
@@ -51,8 +53,20 @@ request.setAttribute("pageName", pageName);
 					<li class="${pageName eq 'addNote.jsp' ? 'active' : ''}">
 						<a href="<c:url value="/note/add" />" ><spring:message code="label.addnote" /></a>
 					</li>
-					<li>
-						<a href="<c:url value="/logout" />"><spring:message code="label.logout" /></a>
+					
+					<li class="${pageName eq 'login.jsp' ? 'active' : ''}">
+						<sec:authorize access="!isAuthenticated()">
+							<a href="<c:url value="/login" />">
+								Login
+							</a>
+						</sec:authorize>
+						<sec:authorize access="isAuthenticated()">
+							user:
+							<sec:authentication property="principal.username" />
+							<a href="<c:url value="/logout" />" role="button">
+								<spring:message code="label.logout" />
+							</a>
+						</sec:authorize>
 					</li>
 				</ul>
 				
