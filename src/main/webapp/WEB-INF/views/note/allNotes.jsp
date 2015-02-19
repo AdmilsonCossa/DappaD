@@ -17,11 +17,11 @@
 		all notes
 	</h3>
 	
-	<c:if test="${!empty noteList}">
+	<c:if test="${!empty notes}">
 
 		<table class="table table-hover">
 			<tbody>
-				<c:forEach items="${noteList}" var="note">
+				<c:forEach items="${notes}" var="note">
 					<tr>
 						<td class="note-list-title" >
 							<div class="action-right">								

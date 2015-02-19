@@ -17,7 +17,8 @@ public class mainController {
 	public ModelAndView listNote() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("home");
-		mav.addObject("noteList", noteService.listNote());
+		mav.addObject("notes", noteService.listNote());
+		mav.addObject("notebooks", noteService.listNote());
 
 		return mav;
 	}

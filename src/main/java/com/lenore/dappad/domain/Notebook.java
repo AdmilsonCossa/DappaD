@@ -23,10 +23,19 @@ public class Notebook implements Serializable {
 	@Column(name = "ID")
 	private Integer id;
 
+	private boolean isDefault;
+
 	private String name;
 
-	@OneToMany(targetEntity = Note.class, mappedBy = "nb", cascade = {
-			CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH }, fetch = FetchType.LAZY)
+	public boolean isDefault() {
+		return isDefault;
+	}
+
+	public void setDefault(boolean isDefault) {
+		this.isDefault = isDefault;
+	}
+
+	@OneToMany(targetEntity = Note.class, mappedBy = "nb", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Note> notes = new ArrayList<Note>();
 
 	// Getters and setters //

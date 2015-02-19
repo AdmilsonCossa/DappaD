@@ -51,10 +51,8 @@ public class NoteController {
 	public ModelAndView add() {
 
 		ModelAndView mav = new ModelAndView();
-		List<Notebook> notebookList = notebookService.listAllNotebooks();
 		mav.setViewName("note/addNote");
 		mav.addObject("note", new Note());
-		mav.addObject("notebookList", notebookList);
 
 		return mav;
 	}	
@@ -63,11 +61,10 @@ public class NoteController {
 	public ModelAndView listNote() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("note/allNotes");
-		mav.addObject("noteList", noteService.listNote());
+		mav.addObject("notes", noteService.listNote());
 
 		return mav;
 	}
-	
 	
 	//Actions to perform
 	
@@ -75,6 +72,8 @@ public class NoteController {
 	public String addNote(@ModelAttribute("note") Note note,
 			BindingResult result) {
 
+		Notebook notebook = notebookService.loadNotebook(note.getNb().getId());
+		note.setNb(notebook);
 		noteService.addNote(note);
 
 		return "redirect:/";
@@ -84,6 +83,8 @@ public class NoteController {
 	public String updateNote(@ModelAttribute("note") Note note,
 			BindingResult result) {
 
+		Notebook notebook = notebookService.loadNotebook(note.getNb().getId());
+		note.setNb(notebook);
 		noteService.updateNote(note);
 
 		return "redirect:/";
@@ -92,7 +93,9 @@ public class NoteController {
 	@RequestMapping("/delete")
 	public String deleteNote(@ModelAttribute("note") Note note,
 			BindingResult result) {
-
+		note = noteService.loadNote(note.getId());
+		note.setNb(null);
+		noteService.updateNote(note);
 		noteService.removeNote(note);
 
 		return "redirect:/";

@@ -16,7 +16,7 @@
 		<a href="/nb/${notebook.id}/edit" class="label label-default action-right">
 			<spring:message code="label.edit" />
 		</a>
-		<a href="/note/add" class="label label-success action-right">
+		<a href="/nb/${notebook.id}/add" class="label label-success action-right">
 			+ note
 		</a>
 		notes in: ${notebook.name}
@@ -24,11 +24,11 @@
 
 
 
-	<c:if test="${!empty noteList}">
+	<c:if test="${!empty notes}">
 
 		<table class="table table-hover">
 			<tbody>
-				<c:forEach items="${noteList}" var="note">
+				<c:forEach items="${notes}" var="note">
 					<tr>
 						<td class="note-list-title" >
 							<div class="action-right">								

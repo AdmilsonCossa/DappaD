@@ -17,11 +17,16 @@
 		<ol>
 			<li>Delete note: ${notebook.name} ?</li>
 			<li>
-				<button type="submit" class="btn btn-primary acion-right" value="submit">
+				<button class="btn btn-primary acion-right" type="submit" name="submit" value="nb">
 					<spring:message code="label.delete" />
-				</button> 
-				<a href="<c:url value="javascript:history.back()" />" class="btn btn-default"><spring:message
-						code="label.cancel" /></a>
+				</button>
+	    		<button class="btn btn-primary acion-right" type="submit" name="submit" value="recursive">
+	    			delete with notes
+	    		</button>
+			
+				<a href="<c:url value="javascript:history.back()" />" class="btn btn-default">
+					<spring:message code="label.cancel" />
+				</a>
 			</li>
 
 

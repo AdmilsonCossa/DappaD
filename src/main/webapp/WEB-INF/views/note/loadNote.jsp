@@ -22,7 +22,7 @@
 	<ol>
 		<li class="wide">${note.title}</li>
 		<li class="wide">${note.text}</li>
-		<li class="wide">Notebook: ${note.notebook.name}</li>
+		<li class="wide">Notebook: ${note.nb.name}</li>
 		<li>
 			<a href="javascript:history.back()" class="btn btn-default"><spring:message
 					code="label.cancel" /></a>

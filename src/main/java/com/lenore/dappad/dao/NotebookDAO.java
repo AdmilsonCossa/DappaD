@@ -11,7 +11,7 @@ public interface NotebookDAO {
     public List<Notebook> listAllNotebooks();
 
     public void removeNotebook(Notebook notebook);   
-    
+
     public Notebook loadNotebook(Integer id);
     
     public void editNotebook(Integer id);

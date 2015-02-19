@@ -17,8 +17,7 @@ public class NoteDAOImpl implements NoteDAO {
 
 	public void addNote(Note note) {
 		if (note.getNb() == null){
-			Notebook notebook = (Notebook) sessionFactory.getCurrentSession().load(Notebook.class,
-					1);
+			Notebook notebook = (Notebook) sessionFactory.getCurrentSession().load(Notebook.class, 1);
 			note.setNb(notebook);
 		}
 		sessionFactory.getCurrentSession().save(note);

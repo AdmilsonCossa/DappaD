@@ -35,7 +35,7 @@ public class NotebookServiceImpl implements NotebookService{
 	public void removeNotebook(Notebook notebook) {
 		notebookDAO.removeNotebook(notebook);
 	}
-	
+
 	@Transactional
 	public Notebook loadNotebook(Integer id) {
 		return notebookDAO.loadNotebook(id);

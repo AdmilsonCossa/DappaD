@@ -28,11 +28,13 @@
 					maxlength="250" class="wide" /></li>
 			<li><form:textarea path="text" value="${note.text}"
 					maxlength="3000" class="wide" /></li>
-			<c:if test="${!empty notebookList}">
-				<li>Notebook: <form:select path="notebook">
-						<form:option value="${note.notebook }" label="${note.notebook.name }" />
-						<c:forEach items="${notebookList}" var="notebook">
-							<form:option value="${notebook}">${notebook.name}</form:option>
+			<c:if test="${!empty notebooks}">
+				<li>Notebook: <form:select path="nb.id">
+						<form:option value="${note.nb.id }" label="${note.nb.name }" />
+						<c:forEach items="${notebooks}" var="notebook">
+						<c:if test="${notebook.id != note.nb.id }">
+							<form:option value="${notebook.id}">${notebook.name}</form:option>
+						</c:if>
 						</c:forEach>
 
 					</form:select></li>

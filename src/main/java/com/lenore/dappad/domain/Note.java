@@ -31,6 +31,7 @@ public class Note implements Serializable {
 
     public Note() {
     	super();
+    	this.nb = new Notebook();
     }
     
 	public Integer getId() {

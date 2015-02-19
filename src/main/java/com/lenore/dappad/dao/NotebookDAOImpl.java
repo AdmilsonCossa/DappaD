@@ -34,7 +34,7 @@ public class NotebookDAOImpl implements NotebookDAO {
 			sessionFactory.getCurrentSession().delete(notebook);
 		}
 	}
-	
+
 	public Notebook loadNotebook(Integer id) {
 		Notebook notebook = (Notebook) sessionFactory.getCurrentSession().get(Notebook.class,
 				id);

@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lenore.dappad.domain.Note;
 import com.lenore.dappad.domain.Notebook;
+import com.lenore.dappad.service.NoteService;
 import com.lenore.dappad.service.NotebookService;
 
 
@@ -20,51 +22,44 @@ import com.lenore.dappad.service.NotebookService;
 public class NotebookController {
 	
 	@Autowired
+	private NoteService noteService;
+	
+	@Autowired
 	private NotebookService notebookService;
 
+	@ModelAttribute("notebooks")
+	public List<Notebook> notebooks() {
+		return notebookService.listAllNotebooks();
+	}
 	// Pages to open
 	
 	@RequestMapping("/nb/{notebookId}/{action}")
 	public ModelAndView action(@PathVariable("notebookId") Integer notebookId, @PathVariable("action") String action) {
 
 		ModelAndView mav = new ModelAndView();
-
+		Notebook notebook;
+		if (action.compareTo("load") == 0) {
+			notebook = notebookService.loadNotebookWithNotes(notebookId);
+			List<Note> notes = notebook.getNotes();
+			mav.addObject("notes", notes);
+		} else {
+			notebook = notebookService.loadNotebook(notebookId);
+		}
 		mav.setViewName("nb/" + action + "Notebook");
-		mav.addObject("notebook", notebookService.loadNotebook(notebookId));
-
-		return mav;
-	}
-	
-	@RequestMapping("/nb/{notebookId}")
-	public ModelAndView load(@PathVariable("notebookId") Integer notebookId) {
-
-		ModelAndView mav = new ModelAndView();
-		Notebook notebook = notebookService.loadNotebookWithNotes(notebookId);
-		List<Note> notes = notebook.getNotes();
-
-		mav.setViewName("nb/loadNotebook");
 		mav.addObject("notebook", notebook);
-		mav.addObject("noteList", notes);
-
-		return mav;
-	}
-	
-	@RequestMapping("/nb/{notebookId}/add")
-	public ModelAndView addNoteToNb(@PathVariable("notebookId") Integer notebookId) {
-
-		ModelAndView mav = new ModelAndView();
-		Notebook notebook = notebookService.loadNotebook(notebookId);
-
-		Note note = new Note();
-		note.setNb(notebook);
-		mav.setViewName("note/addNote");
-		mav.addObject("note", note);
+		
+		if (action.compareTo("add") == 0) {
+			Note note = new Note();
+			note.setNb(notebook);
+			mav.setViewName("note/addNote");
+			mav.addObject("note", note);
+		}
 
 		return mav;
 	}
 	
 	@RequestMapping("/listNotebooks")
-	public ModelAndView listNotebook() {
+	public ModelAndView listNotebooks() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("nb/allNotebooks");
 		mav.addObject("notebookList", notebookService.listAllNotebooks());
@@ -86,7 +81,7 @@ public class NotebookController {
 	//Actions to perform
 	
 		@RequestMapping(value = "/nb/add", method = RequestMethod.POST)
-		public String addNote(@ModelAttribute("notebook") Notebook notebook,
+		public String addNotebook(@ModelAttribute("notebook") Notebook notebook,
 				BindingResult result) {
 
 			notebookService.addNotebook(notebook);
@@ -95,21 +90,30 @@ public class NotebookController {
 		}
 
 		@RequestMapping(value = "/nb/update", method = RequestMethod.POST)
-		public String updateNote(@ModelAttribute("notebook") Notebook notebook,
+		public String updateNotebook(@ModelAttribute("notebook") Notebook notebook,
 				BindingResult result) {
 
 			notebookService.updateNotebook(notebook);
 
-			return "redirect:/";
+			return "redirect:/nb/" + notebook.getId() + "/load";
 		}
 
 		@RequestMapping("/nb/delete")
-		public String deleteNote(@ModelAttribute("notebook") Notebook notebook,
+		public String deleteNoteBook(@ModelAttribute("notebook") Notebook notebook, 
+				@RequestParam("submit") String data,
 				BindingResult result) {
-
+			if (data.compareTo("recursive") != 0) {
+				List<Note> notes = notebookService.loadNotebookWithNotes(notebook.getId()).getNotes();
+				for (Note note : notes) {
+					note.setNb(null);
+					noteService.updateNote(note);
+				}
+			} else {
+				notebook = notebookService.loadNotebookWithNotes(notebook.getId());
+			}
 			notebookService.removeNotebook(notebook);
 
-			return "redirect:/";
+			return "redirect:/listNotebooks";
 		}
 
 }

@@ -8,20 +8,18 @@
 <jsp:include page="../header.jsp" />
 
 <div class="container">
-	<form:form method="post" action="/add" modelAttribute="note" class="note">
+	<form:form action="/add" modelAttribute="note" class="note">
 
 		<ol>
 			<li><form:input path="title" maxlength="250" class="wide" /></li>
 			<li><form:textarea path="text" maxlength="3000" class="wide" /></li>
 
 			<c:if test="${!empty notebooks}">
-				<li>Notebook: <form:select path="nb">
-						<form:option value="0" label="--choose notebook--" />
-						<c:forEach items="${notebooks}" var="notebook">
-							<form:option value="${notebook}">${notebook.name}</form:option>
-						</c:forEach>
-
-					</form:select></li>
+				<li>Notebook: 
+				<form:select path="nb.id" items="${notebooks}"
+                        itemLabel="name" itemValue="id">
+                    </form:select>
+				</li>
 			</c:if>
 
 			<li><input type="submit" class="btn btn-primary acion-right"
