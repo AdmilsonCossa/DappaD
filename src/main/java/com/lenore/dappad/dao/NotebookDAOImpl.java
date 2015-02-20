@@ -2,15 +2,19 @@ package com.lenore.dappad.dao;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.lenore.dappad.HomeController;
 import com.lenore.dappad.domain.Notebook;
 
 @Repository
 public class NotebookDAOImpl implements NotebookDAO {
 
+	private static final Logger logger = Logger.getLogger(HomeController.class.getName());
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -36,20 +40,30 @@ public class NotebookDAOImpl implements NotebookDAO {
 	}
 
 	public Notebook loadNotebook(Integer id) {
-		Notebook notebook = (Notebook) sessionFactory.getCurrentSession().get(Notebook.class,
-				id);
+		Notebook notebook = (Notebook) sessionFactory.getCurrentSession().get(Notebook.class,id);
 		return notebook;
 	}
 	
 	
 	public void editNotebook(Integer id) {
 		Notebook notebook = loadNotebook(id);
-		System.out.println(notebook.getName());
+		logger.info("Notebook for edit: " + notebook.getTitle());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Notebook getDefault() {
-		return loadNotebook(1);
+	public Notebook getDefaultNotebook() {
+		List<Notebook> notebooks = sessionFactory.getCurrentSession()
+				.createQuery( "from Notebook where isDefault = true" )
+//		        .setString( "isDefault", "true" )
+		        .list();
+		
+		if (notebooks.size() > 0) {
+			return notebooks.get(0);
+		} else {
+			logger.warn("Default notebook not found");
+			return null;
+		}
 	}
 
 }

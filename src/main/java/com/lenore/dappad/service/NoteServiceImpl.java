@@ -26,8 +26,8 @@ public class NoteServiceImpl implements NoteService{
 	}
 
 	@Transactional
-	public List<Note> listNote() {
-		return noteDAO.listNote();
+	public List<Note> allNotes() {
+		return noteDAO.allNotes();
 	}
 
 	@Transactional

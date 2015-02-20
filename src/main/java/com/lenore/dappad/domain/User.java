@@ -6,36 +6,35 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
-public class Username {
-	@Id
+@Table(name = "user")
+public class User extends BaseEntity {
+
 	private String username;
 	private String password;
 	private boolean enabled;
 	
-	@OneToMany(targetEntity = Username.class, mappedBy = "username", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<UserRole> userRole = new HashSet<UserRole>(0);
+	@OneToMany(targetEntity = UserRole.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<UserRole> userRoles = new HashSet<UserRole>(0);
 
-	public Username() {
+	public User() {
 		
 	}
 	
-	public Username(String username, String password, boolean enabled) {
+	public User(String username, String password, boolean enabled) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 	}
 
-	public Username(String username, String password, boolean enabled, Set<UserRole> userRole) {
+	public User(String username, String password, boolean enabled, Set<UserRole> userRoles) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
-		this.userRole = userRole;
+		this.userRoles = userRoles;
 	}
 
 	public String getUsername() {
@@ -62,12 +61,12 @@ public class Username {
 		this.enabled = enabled;
 	}
 
-	public Set<UserRole> getUserRole() {
-		return userRole;
+	public Set<UserRole> getUserRoles() {
+		return userRoles;
 	}
 
-	public void setUserRole(Set<UserRole> userRole) {
-		this.userRole = userRole;
+	public void setUserRoles(Set<UserRole> userRole) {
+		this.userRoles = userRole;
 	}
 
 }

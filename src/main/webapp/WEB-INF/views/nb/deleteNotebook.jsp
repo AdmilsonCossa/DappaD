@@ -15,7 +15,7 @@
 		<form:hidden path="id" value="${notebook.id}" />
 
 		<ol>
-			<li>Delete note: ${notebook.name} ?</li>
+			<li>Delete note: ${notebook.title} ?</li>
 			<li>
 				<button class="btn btn-primary acion-right" type="submit" name="submit" value="nb">
 					<spring:message code="label.delete" />

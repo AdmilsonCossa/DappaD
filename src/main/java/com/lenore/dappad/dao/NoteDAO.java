@@ -8,7 +8,7 @@ public interface NoteDAO {
     public void addNote(Note note);
     public void updateNote(Note note);
 
-    public List<Note> listNote();
+    public List<Note> allNotes();
 
     public void removeNote(Note note);   
     

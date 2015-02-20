@@ -52,5 +52,10 @@ public class NotebookServiceImpl implements NotebookService{
     	Hibernate.initialize(notebook.getNotes());
     	return notebook;
     }
+	
+	@Transactional
+	public Notebook getDefaultNotebook() {
+		return notebookDAO.getDefaultNotebook();
+	}
 
 }

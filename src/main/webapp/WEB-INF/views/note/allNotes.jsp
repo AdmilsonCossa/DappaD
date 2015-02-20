@@ -11,7 +11,7 @@
 <div class="container">
 	
 	<h3>
-		<a href="/node/add" class="label label-success action-right">
+		<a href="/note/add" class="label label-success action-right">
 			new
 		</a>
 		all notes

@@ -2,48 +2,34 @@ package com.lenore.dappad.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_roles")
-public class UserRole {
+public class UserRole extends BaseEntity {
 
-	@Id
-	@GeneratedValue
-	private Integer userRoleId;
-	
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "username")
-	private Username username;
+    @JoinColumn(name = "user_id")
+	private User user;
 	
 	private String role;
 
 	public UserRole() {
 	}
 
-	public UserRole(Username username, String role) {
-		this.username = username;
+	public UserRole(User user, String role) {
+		this.user = user;
 		this.role = role;
 	}
 	
-	public Integer getUserRoleId() {
-		return userRoleId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserRoleId(Integer userRoleId) {
-		this.userRoleId = userRoleId;
-	}
-
-	public Username getUsername() {
-		return username;
-	}
-
-	public void setUsername(Username user) {
-		this.username = user;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getRole() {

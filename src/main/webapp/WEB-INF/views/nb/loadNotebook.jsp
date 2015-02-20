@@ -19,7 +19,7 @@
 		<a href="/nb/${notebook.id}/add" class="label label-success action-right">
 			+ note
 		</a>
-		notes in: ${notebook.name}
+		notes in: ${notebook.title}
 	</h3>
 
 

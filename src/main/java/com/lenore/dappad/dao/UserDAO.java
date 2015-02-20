@@ -1,9 +1,14 @@
 package com.lenore.dappad.dao;
 
-import com.lenore.dappad.domain.Username;
+import java.util.List;
+
+import com.lenore.dappad.domain.User;
 
 public interface UserDAO {
 	
-	Username findByUserName(String username);
+	User findByUserName(String username);
 
+	User findUser(Integer id);
+	
+	List<User> allUsers();
 }

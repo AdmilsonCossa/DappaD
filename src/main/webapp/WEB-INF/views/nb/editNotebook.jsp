@@ -23,7 +23,7 @@
 		<form:hidden path="id" value="${notebook.id}" />
 
 		<ol>
-			<li><form:input path="name" value="${notebook.name}"
+			<li><form:input path="name" value="${notebook.title}"
 					maxlength="250" class="wide" /></li>
 			<li>
 				<button type="submit" class="btn btn-primary acion-right" value="submit">

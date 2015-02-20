@@ -2,6 +2,7 @@ package com.lenore.dappad.web;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,8 @@ import com.lenore.dappad.service.NotebookService;
 @Controller
 public class NoteController {
 
+	private static final Logger logger = Logger.getLogger(NoteController.class.getName());
+	
 	@Autowired
 	private NoteService noteService;
 
@@ -38,7 +41,7 @@ public class NoteController {
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("note/" + action + "Note");
-		System.out.println(mav.getViewName());
+		logger.info("current action: " + mav.getViewName());
 		mav.addObject("note", noteService.loadNote(noteId));
 		mav.addObject("notebookList", notebookService.listAllNotebooks());
 		
@@ -52,7 +55,10 @@ public class NoteController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("note/addNote");
-		mav.addObject("note", new Note());
+		Note note = new Note();
+		Notebook notebook = notebookService.getDefaultNotebook();
+		note.setNb(notebook);
+		mav.addObject("note", note);
 
 		return mav;
 	}	
@@ -61,7 +67,7 @@ public class NoteController {
 	public ModelAndView listNote() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("note/allNotes");
-		mav.addObject("notes", noteService.listNote());
+		mav.addObject("notes", noteService.allNotes());
 
 		return mav;
 	}

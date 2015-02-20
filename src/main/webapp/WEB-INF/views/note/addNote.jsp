@@ -14,13 +14,7 @@
 			<li><form:input path="title" maxlength="250" class="wide" /></li>
 			<li><form:textarea path="text" maxlength="3000" class="wide" /></li>
 
-			<c:if test="${!empty notebooks}">
-				<li>Notebook: 
-				<form:select path="nb.id" items="${notebooks}"
-                        itemLabel="name" itemValue="id">
-                    </form:select>
-				</li>
-			</c:if>
+			<jsp:include page="selectNb.jsp" />
 
 			<li><input type="submit" class="btn btn-primary acion-right"
 				value="<spring:message code="label.save"/>" /> <a

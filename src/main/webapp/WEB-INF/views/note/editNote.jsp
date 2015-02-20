@@ -28,17 +28,9 @@
 					maxlength="250" class="wide" /></li>
 			<li><form:textarea path="text" value="${note.text}"
 					maxlength="3000" class="wide" /></li>
-			<c:if test="${!empty notebooks}">
-				<li>Notebook: <form:select path="nb.id">
-						<form:option value="${note.nb.id }" label="${note.nb.name }" />
-						<c:forEach items="${notebooks}" var="notebook">
-						<c:if test="${notebook.id != note.nb.id }">
-							<form:option value="${notebook.id}">${notebook.name}</form:option>
-						</c:if>
-						</c:forEach>
 
-					</form:select></li>
-			</c:if>
+			<jsp:include page="selectNb.jsp" />
+
 			<li>
 				<button type="submit" class="btn btn-primary acion-right"
 					value="submit">

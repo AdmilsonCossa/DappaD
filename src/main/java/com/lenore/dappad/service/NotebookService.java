@@ -5,14 +5,20 @@ import java.util.List;
 import com.lenore.dappad.domain.Notebook;
 
 public interface NotebookService {
-    public void addNotebook(Notebook notebook);
+	
+    void addNotebook(Notebook notebook);
 
-	public void updateNotebook(Notebook notebook);
+	void updateNotebook(Notebook notebook);
 
-    public List<Notebook> listAllNotebooks();
+    List<Notebook> listAllNotebooks();
 
-    public void removeNotebook(Notebook notebook);
-    public Notebook loadNotebook(Integer id);
-    public Notebook loadNotebookWithNotes(Integer id);
-    public void editNotebook(Integer id);
+    void removeNotebook(Notebook notebook);
+    
+    Notebook loadNotebook(Integer id);
+    
+    Notebook loadNotebookWithNotes(Integer id);
+    
+    void editNotebook(Integer id);
+    
+    Notebook getDefaultNotebook();
 }

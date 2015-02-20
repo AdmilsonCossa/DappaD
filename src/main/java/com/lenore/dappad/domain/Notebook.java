@@ -5,35 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "notebook")
-public class Notebook implements Serializable {
+public class Notebook extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue
-	@Column(name = "ID")
-	private Integer id;
 
 	private boolean isDefault;
 
-	private String name;
-
-	public boolean isDefault() {
-		return isDefault;
-	}
-
-	public void setDefault(boolean isDefault) {
-		this.isDefault = isDefault;
-	}
+	private String title;
 
 	@OneToMany(targetEntity = Note.class, mappedBy = "nb", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Note> notes = new ArrayList<Note>();
@@ -44,20 +28,12 @@ public class Notebook implements Serializable {
 		super();
 	}
 
-	public Integer getId() {
-		return id;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public List<Note> getNotes() {
@@ -66,6 +42,14 @@ public class Notebook implements Serializable {
 
 	public void setNotes(List<Note> notes) {
 		this.notes = notes;
+	}
+
+	public boolean isDefault() {
+		return isDefault;
+	}
+	
+	public void setDefault(boolean isDefault) {
+		this.isDefault = isDefault;
 	}
 
 }

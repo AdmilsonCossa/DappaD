@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
+import com.lenore.dappad.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebMvc
@@ -43,4 +46,9 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 
 	}
 
+	@Bean
+	public UserDetailsService getUserDetailsService(){
+	    return new UserDetailsServiceImpl();
+	}
+	
 }

@@ -32,7 +32,7 @@
 									<span class="glyphicon glyphicon-remove"></span>
 								</a> 
 							</div>
-							<a class="crop" href="/nb/${notebook.id}/load">${notebook.name} </a>
+							<a class="crop" href="/nb/${notebook.id}/load">${notebook.title} </a>
 						</td>
 					</tr>
 				</c:forEach>

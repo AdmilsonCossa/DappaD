@@ -1,9 +1,17 @@
 package com.lenore.dappad.service;
 
-import com.lenore.dappad.domain.Username;
+import java.util.List;
+
+import com.lenore.dappad.domain.User;
 
 public interface UserService {
 	
-	Username getUser(String login);
+	User getUser(String login);
+	
+	User findUser(Integer id);
+	
+	User findUserByName(String username);
+	
+	List<User> allUsers();
 	
 }
