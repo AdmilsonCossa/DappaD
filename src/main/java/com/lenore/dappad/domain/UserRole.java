@@ -18,14 +18,15 @@ public class UserRole {
 	
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "username")
-	private UserD user;
+	private Username username;
+	
 	private String role;
 
 	public UserRole() {
 	}
 
-	public UserRole(UserD user, String role) {
-		this.user = user;
+	public UserRole(Username username, String role) {
+		this.username = username;
 		this.role = role;
 	}
 	
@@ -37,12 +38,12 @@ public class UserRole {
 		this.userRoleId = userRoleId;
 	}
 
-	public UserD getUser() {
-		return user;
+	public Username getUsername() {
+		return username;
 	}
 
-	public void setUser(UserD user) {
-		this.user = user;
+	public void setUsername(Username user) {
+		this.username = user;
 	}
 
 	public String getRole() {

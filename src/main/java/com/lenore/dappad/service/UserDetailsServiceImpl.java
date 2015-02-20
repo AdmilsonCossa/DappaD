@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.lenore.dappad.domain.UserD;
+import com.lenore.dappad.domain.Username;
 import com.lenore.dappad.domain.UserRoleEnum;
 
 @Service
@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserD user = userService.getUser("colibri");
+        Username user = userService.getUser("colibri");
         Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
         roles.add(new SimpleGrantedAuthority(UserRoleEnum.USER.name()));
 

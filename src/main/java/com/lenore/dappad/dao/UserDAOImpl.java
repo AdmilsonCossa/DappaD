@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.lenore.dappad.domain.UserD;
+import com.lenore.dappad.domain.Username;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -16,9 +16,9 @@ public class UserDAOImpl implements UserDAO {
 	private SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
-	public UserD findByUserName(String username) {
+	public Username findByUserName(String username) {
 
-		List<UserD> users = new ArrayList<UserD>();
+		List<Username> users = new ArrayList<Username>();
 
 		users = sessionFactory.getCurrentSession()
 				.createQuery("from User where username=?")

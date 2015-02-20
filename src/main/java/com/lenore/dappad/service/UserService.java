@@ -1,9 +1,9 @@
 package com.lenore.dappad.service;
 
-import com.lenore.dappad.domain.UserD;
+import com.lenore.dappad.domain.Username;
 
 public interface UserService {
 	
-	UserD getUser(String login);
+	Username getUser(String login);
 	
 }

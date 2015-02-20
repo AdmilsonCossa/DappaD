@@ -1,9 +1,9 @@
 package com.lenore.dappad.dao;
 
-import com.lenore.dappad.domain.UserD;
+import com.lenore.dappad.domain.Username;
 
 public interface UserDAO {
 	
-	UserD findByUserName(String username);
+	Username findByUserName(String username);
 
 }

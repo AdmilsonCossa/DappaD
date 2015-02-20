@@ -13,7 +13,7 @@ public class NotebookDAOImpl implements NotebookDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-
+	
 	public void addNotebook(Notebook notebook) {
 		sessionFactory.getCurrentSession().save(notebook);
 	}

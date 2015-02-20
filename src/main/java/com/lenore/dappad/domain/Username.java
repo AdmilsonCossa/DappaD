@@ -12,26 +12,26 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class UserD {
+public class Username {
 	@Id
 	private String username;
 	private String password;
 	private boolean enabled;
 	
-	@OneToMany(targetEntity = UserD.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(targetEntity = Username.class, mappedBy = "username", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
-	public UserD() {
+	public Username() {
 		
 	}
 	
-	public UserD(String username, String password, boolean enabled) {
+	public Username(String username, String password, boolean enabled) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 	}
 
-	public UserD(String username, String password, boolean enabled, Set<UserRole> userRole) {
+	public Username(String username, String password, boolean enabled, Set<UserRole> userRole) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
