@@ -9,20 +9,33 @@
 
 <div class="container">
 
-	<h3>
-		<a href="/nb/${notebook.id}/delete" class="label label-danger action-right">
-			<spring:message code="label.delete" />
-		</a>
-		<a href="/nb/${notebook.id}/edit" class="label label-default action-right">
-			<spring:message code="label.edit" />
-		</a>
-		<a href="/nb/${notebook.id}/add" class="label label-success action-right">
-			+ note
-		</a>
-		notes in: ${notebook.title}
-	</h3>
-
-
+	<div class="page-header">
+		<h3>
+			notes in: ${notebook.title}
+			<span style="display:inline">
+				<form:form method="post" action="/nb/setDflt" modelAttribute="notebook" class="action-right" style="width:400px;text-align:right">
+					<form:hidden path="id" value="${notebook.id}" />
+			
+					<c:if test="${!notebook.isDefault() }">
+						<button type="submit" class="label label-default" value="submit">
+							Set as default
+						</button>
+					</c:if>
+					<a href="/nb/${notebook.id}/add" class="label label-success">
+						+ note
+					</a>
+					<a href="/nb/${notebook.id}/edit" class="label label-default">
+						<spring:message code="label.edit" />
+					</a>
+					<a href="/nb/${notebook.id}/delete" class="label label-danger">
+						<spring:message code="label.delete" />
+					</a>
+				</form:form>
+			</span>
+		</h3>
+		
+		
+	</div>		
 
 	<c:if test="${!empty notes}">
 

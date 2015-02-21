@@ -13,7 +13,7 @@
 		<a href="/nb/${notebook.id}/delete" class="label label-danger action-right">
 			<spring:message code="label.delete" />
 		</a>
-		edit : ${notebook.name}
+		edit : ${notebook.title}
 	</h3>
 
 
@@ -23,8 +23,12 @@
 		<form:hidden path="id" value="${notebook.id}" />
 
 		<ol>
-			<li><form:input path="name" value="${notebook.title}"
-					maxlength="250" class="wide" /></li>
+			<li>
+				<form:input path="title" value="${notebook.title}" maxlength="250" class="wide" />
+			</li>
+			<li>
+				<form:checkbox path="isDefault" label="set as default" />
+			</li>
 			<li>
 				<button type="submit" class="btn btn-primary acion-right" value="submit">
 					<spring:message code="label.save" />

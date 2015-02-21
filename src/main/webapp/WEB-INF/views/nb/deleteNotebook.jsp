@@ -21,13 +21,13 @@
 			<c:if test="${newDefault != null}">
 			<li>
 				This notebook is default. Choose new default notebook
-				<form:select modelAttribute="newDefault" path="id">
+				<select name="newDefaultId">
 		 			<c:forEach items="${notebooks}" var="nb">
 						<c:if test="${notebook.id != nb.id}">
-							<form:option value="${nb.id}">${nb.title}</form:option>
+							<option value="${nb.id}">${nb.title}</option>
 						</c:if>
 					</c:forEach>
-				</form:select>
+				</select>
 			</li>
 			</c:if>
 			<li>

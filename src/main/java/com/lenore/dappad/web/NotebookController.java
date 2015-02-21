@@ -25,6 +25,7 @@ import com.lenore.dappad.service.NotebookService;
  * - edit NB:   title, setDefault 
  * - delete NB: title, delete with notes, delete just NB. Notes will be without notebook
  * - delete NB: default? - change to some other NB - select form
+ * - setDfltNB: set NB as default, reset the previous
  * 
  * @author lenore
  *
@@ -72,7 +73,7 @@ public class NotebookController {
 	}
 	
 	@RequestMapping("/nb/{notebookId}/delete")
-	public ModelAndView action(@PathVariable("notebookId") Integer notebookId) {
+	public ModelAndView deleteNotebook(@PathVariable("notebookId") Integer notebookId) {
 
 		ModelAndView mav = new ModelAndView();
 		Notebook notebook;
@@ -84,6 +85,19 @@ public class NotebookController {
 		} 
 		
 		mav.setViewName("nb/deleteNotebook");
+		mav.addObject("notebook", notebook);
+		
+		return mav;
+	}
+	
+	@RequestMapping("/nb/{notebookId}/edit")
+	public ModelAndView editNotebook(@PathVariable("notebookId") Integer notebookId) {
+
+		ModelAndView mav = new ModelAndView();
+		Notebook notebook;
+		notebook = notebookService.loadNotebook(notebookId);
+		
+		mav.setViewName("nb/editNotebook");
 		mav.addObject("notebook", notebook);
 		
 		return mav;
@@ -127,7 +141,7 @@ public class NotebookController {
 
 		notebookService.addNotebook(notebook);
 
-		return "redirect:/allNotebooks";
+		return "redirect:/listNotebooks";
 	}
 
 	@RequestMapping(value = "/nb/update", method = RequestMethod.POST)
@@ -136,16 +150,16 @@ public class NotebookController {
 
 		notebookService.updateNotebook(notebook);
 
-		return "redirect:/nb/" + notebook.getId() + "/load";
+		return "redirect:/nb/" + notebook.getId() + "/";
 	}
 
-	@RequestMapping("/nb/delete")
+	@RequestMapping(value = "/nb/delete", method = RequestMethod.POST)
 	public String deleteNoteBook(@ModelAttribute("notebook") Notebook notebook, 
-			@ModelAttribute("newDefault") Notebook newDefault,
 			@RequestParam("submit") String data,
+			@RequestParam("newDefaultId") Integer newDefaultId,
 			BindingResult result) {
-		if (newDefault != null) {
-			notebookService.setDefaultNotebook(newDefault.getId());
+		if (newDefaultId != null) {
+			notebookService.setDefaultNotebook(newDefaultId);
 		}
 		notebook = notebookService.loadNotebook(notebook.getId());
 		if (data.compareTo("recursive") != 0) {
@@ -154,11 +168,17 @@ public class NotebookController {
 				note.setNb(null);
 				noteService.updateNote(note);
 			}
+			notebook.setNotes(null);
 		}
-		notebook.setNotes(null);
 		notebookService.removeNotebook(notebook);
 
 		return "redirect:/listNotebooks";
+	}
+	
+	@RequestMapping(value = "/nb/setDflt", method = RequestMethod.POST)
+	public String setDefaultNotebook(@ModelAttribute("notebook") Notebook notebook) {
+		notebookService.setDefaultNotebook(notebook.getId());
+		return "redirect:/nb/" + notebook.getId() + "/";
 	}
 
 }
