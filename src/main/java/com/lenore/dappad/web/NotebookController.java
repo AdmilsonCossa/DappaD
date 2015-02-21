@@ -17,7 +17,18 @@ import com.lenore.dappad.domain.Notebook;
 import com.lenore.dappad.service.NoteService;
 import com.lenore.dappad.service.NotebookService;
 
-
+/**
+ * Notebook controller. Functions that are supported:
+ * 
+ * - new NB:    title, setDefault
+ * - load NB:   title, notes, isDefault 
+ * - edit NB:   title, setDefault 
+ * - delete NB: title, delete with notes, delete just NB. Notes will be without notebook
+ * - delete NB: default? - change to some other NB - select form
+ * 
+ * @author lenore
+ *
+ */
 @Controller
 public class NotebookController {
 	
@@ -31,32 +42,71 @@ public class NotebookController {
 	public List<Notebook> notebooks() {
 		return notebookService.listAllNotebooks();
 	}
+	
 	// Pages to open
 	
-	@RequestMapping("/nb/{notebookId}/{action}")
-	public ModelAndView action(@PathVariable("notebookId") Integer notebookId, @PathVariable("action") String action) {
+	@RequestMapping("/nb/new")
+	public ModelAndView add() {
+
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("nb/newNotebook");
+		mav.addObject("notebook", new Notebook());
+
+		return mav;
+	}	
+
+	@RequestMapping("/nb/{notebookId}/")
+	public ModelAndView loadNotebook(@PathVariable("notebookId") Integer notebookId) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Notebook notebook = notebookService.loadNotebook(notebookId);
+		List<Note> notes = notebook.getNotes();
+		
+		mav.setViewName("nb/loadNotebook");
+		mav.addObject("notebook", notebook);
+		mav.addObject("notes", notes);
+		
+		return mav;
+	}
+	
+	@RequestMapping("/nb/{notebookId}/delete")
+	public ModelAndView action(@PathVariable("notebookId") Integer notebookId) {
 
 		ModelAndView mav = new ModelAndView();
 		Notebook notebook;
-		if (action.compareTo("load") == 0) {
-			notebook = notebookService.loadNotebookWithNotes(notebookId);
-			List<Note> notes = notebook.getNotes();
-			mav.addObject("notes", notes);
-		} else {
-			notebook = notebookService.loadNotebook(notebookId);
-		}
-		mav.setViewName("nb/" + action + "Notebook");
+		notebook = notebookService.loadNotebook(notebookId);
+		if (notebook.isDefault()) {
+			Notebook newDefault = new Notebook();
+			mav.addObject("newDefault", newDefault);
+//			mav.addObject("isDefault", true);
+		} 
+		
+		mav.setViewName("nb/deleteNotebook");
 		mav.addObject("notebook", notebook);
 		
-		if (action.compareTo("add") == 0) {
-			Note note = new Note();
-			note.setNb(notebook);
-			mav.setViewName("note/addNote");
-			mav.addObject("note", note);
-		}
+		return mav;
+	}
+
+	@RequestMapping("/nb/{notebookId}/add")
+	public ModelAndView addNoteNotebook(@PathVariable("notebookId") Integer notebookId) {
+
+		ModelAndView mav = new ModelAndView();
+		
+		Notebook notebook = notebookService.loadNotebook(notebookId);
+		Note note = new Note();
+
+		note.setNb(notebook);
+		mav.setViewName("note/addNote");
+		mav.addObject("note", note);
+		mav.addObject("notebook", notebook);
 
 		return mav;
 	}
+	
+	
+	
 	
 	@RequestMapping("/listNotebooks")
 	public ModelAndView listNotebooks() {
@@ -67,53 +117,48 @@ public class NotebookController {
 		return mav;
 	}
 	
-	@RequestMapping("/nb/add")
-	public ModelAndView add() {
 
-		ModelAndView mav = new ModelAndView();
-
-		mav.setViewName("nb/addNotebook");
-		mav.addObject("notebook", new Notebook());
-
-		return mav;
-	}	
 	
 	//Actions to perform
 	
-		@RequestMapping(value = "/nb/add", method = RequestMethod.POST)
-		public String addNotebook(@ModelAttribute("notebook") Notebook notebook,
-				BindingResult result) {
+	@RequestMapping(value = "/nb/new", method = RequestMethod.POST)
+	public String addNotebook(@ModelAttribute("notebook") Notebook notebook,
+			BindingResult result) {
 
-			notebookService.addNotebook(notebook);
+		notebookService.addNotebook(notebook);
 
-			return "redirect:/listNotebooks";
+		return "redirect:/allNotebooks";
+	}
+
+	@RequestMapping(value = "/nb/update", method = RequestMethod.POST)
+	public String updateNotebook(@ModelAttribute("notebook") Notebook notebook,
+			BindingResult result) {
+
+		notebookService.updateNotebook(notebook);
+
+		return "redirect:/nb/" + notebook.getId() + "/load";
+	}
+
+	@RequestMapping("/nb/delete")
+	public String deleteNoteBook(@ModelAttribute("notebook") Notebook notebook, 
+			@ModelAttribute("newDefault") Notebook newDefault,
+			@RequestParam("submit") String data,
+			BindingResult result) {
+		if (newDefault != null) {
+			notebookService.setDefaultNotebook(newDefault.getId());
 		}
-
-		@RequestMapping(value = "/nb/update", method = RequestMethod.POST)
-		public String updateNotebook(@ModelAttribute("notebook") Notebook notebook,
-				BindingResult result) {
-
-			notebookService.updateNotebook(notebook);
-
-			return "redirect:/nb/" + notebook.getId() + "/load";
-		}
-
-		@RequestMapping("/nb/delete")
-		public String deleteNoteBook(@ModelAttribute("notebook") Notebook notebook, 
-				@RequestParam("submit") String data,
-				BindingResult result) {
-			if (data.compareTo("recursive") != 0) {
-				List<Note> notes = notebookService.loadNotebookWithNotes(notebook.getId()).getNotes();
-				for (Note note : notes) {
-					note.setNb(null);
-					noteService.updateNote(note);
-				}
-			} else {
-				notebook = notebookService.loadNotebookWithNotes(notebook.getId());
+		notebook = notebookService.loadNotebook(notebook.getId());
+		if (data.compareTo("recursive") != 0) {
+			List<Note> notes = notebook.getNotes();
+			for (Note note : notes) {
+				note.setNb(null);
+				noteService.updateNote(note);
 			}
-			notebookService.removeNotebook(notebook);
-
-			return "redirect:/listNotebooks";
 		}
+		notebook.setNotes(null);
+		notebookService.removeNotebook(notebook);
+
+		return "redirect:/listNotebooks";
+	}
 
 }

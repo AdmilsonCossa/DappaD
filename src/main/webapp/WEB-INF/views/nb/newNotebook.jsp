@@ -8,7 +8,7 @@
 <jsp:include page="../header.jsp" />
 
 <div class="container">
-	<form:form method="post" action="/nb/add" modelAttribute="notebook" class="notebook">
+	<form:form method="post" action="/nb/new" modelAttribute="notebook" class="notebook">
 
 		<ol>
 			<li><form:input path="title" maxlength="250" class="wide" /></li>

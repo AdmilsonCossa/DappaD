@@ -3,6 +3,7 @@ package com.lenore.dappad.dao;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,6 +42,7 @@ public class NotebookDAOImpl implements NotebookDAO {
 
 	public Notebook loadNotebook(Integer id) {
 		Notebook notebook = (Notebook) sessionFactory.getCurrentSession().get(Notebook.class,id);
+    	Hibernate.initialize(notebook.getNotes());
 		return notebook;
 	}
 	
@@ -55,7 +57,6 @@ public class NotebookDAOImpl implements NotebookDAO {
 	public Notebook getDefaultNotebook() {
 		List<Notebook> notebooks = sessionFactory.getCurrentSession()
 				.createQuery( "from Notebook where isDefault = true" )
-//		        .setString( "isDefault", "true" )
 		        .list();
 		
 		if (notebooks.size() > 0) {

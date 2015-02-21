@@ -21,4 +21,6 @@ public interface NotebookService {
     void editNotebook(Integer id);
     
     Notebook getDefaultNotebook();
+    
+    void setDefaultNotebook(Integer newDefaultId);
 }

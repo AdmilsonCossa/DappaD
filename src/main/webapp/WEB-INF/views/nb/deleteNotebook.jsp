@@ -5,6 +5,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<jsp:include page="../header.jsp" />
+
 <div class="container">
 
 	<h3>
@@ -16,6 +18,18 @@
 
 		<ol>
 			<li>Delete note: ${notebook.title} ?</li>
+			<c:if test="${newDefault != null}">
+			<li>
+				This notebook is default. Choose new default notebook
+				<form:select modelAttribute="newDefault" path="id">
+		 			<c:forEach items="${notebooks}" var="nb">
+						<c:if test="${notebook.id != nb.id}">
+							<form:option value="${nb.id}">${nb.title}</form:option>
+						</c:if>
+					</c:forEach>
+				</form:select>
+			</li>
+			</c:if>
 			<li>
 				<button class="btn btn-primary acion-right" type="submit" name="submit" value="nb">
 					<spring:message code="label.delete" />
@@ -29,12 +43,10 @@
 				</a>
 			</li>
 
-
 		</ol>
 
 	</form:form>
 
-
-
 </div>
 
+<jsp:include page="../footer.jsp" />

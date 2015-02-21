@@ -11,7 +11,7 @@
 <div class="container">
 	
 	<h3>
-		<a href="/nb/add" class="label label-success action-right">
+		<a href="/nb/new" class="label label-success action-right">
 			new
 		</a>
 		your notebooks
@@ -32,7 +32,7 @@
 									<span class="glyphicon glyphicon-remove"></span>
 								</a> 
 							</div>
-							<a class="crop" href="/nb/${notebook.id}/load">${notebook.title} </a>
+							<a class="crop" href="/nb/${notebook.id}/">${notebook.title} </a>
 						</td>
 					</tr>
 				</c:forEach>

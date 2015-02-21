@@ -57,5 +57,15 @@ public class NotebookServiceImpl implements NotebookService{
 	public Notebook getDefaultNotebook() {
 		return notebookDAO.getDefaultNotebook();
 	}
+	
+	@Transactional
+	public void setDefaultNotebook(Integer newDefaultId) {
+		Notebook oldDefault = notebookDAO.getDefaultNotebook();
+		Notebook newDefault = loadNotebook(newDefaultId);
+		oldDefault.setDefault(false);
+		newDefault.setDefault(true);
+		notebookDAO.updateNotebook(oldDefault);
+		notebookDAO.updateNotebook(newDefault);
+	}
 
 }
